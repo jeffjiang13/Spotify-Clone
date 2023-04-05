@@ -10,16 +10,16 @@
 
 
 <!-- Badges -->
-<a href="" target="_blank">![](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)</a>
+<a href="https://jj-spotify.vercel.app" target="_blank">![](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)</a>
 ![](https://img.shields.io/badge/Maintained-Yes-indigo)
-![](https://img.shields.io/github/forks/SashenJayathilaka/Spotify-Clone.svg)
-![](https://img.shields.io/github/stars/SashenJayathilaka/Spotify-Clone.svg)
-![](https://img.shields.io/github/issues/SashenJayathilaka/Spotify-Clone)
-![](https://img.shields.io/github/last-commit/SashenJayathilaka/Spotify-Clone)
+![](https://img.shields.io/github/forks/jeffjiang13/Spotify-Clone.svg)
+![](https://img.shields.io/github/stars/jeffjiang13/Spotify-Clone.svg)
+![](https://img.shields.io/github/issues/jeffjiang13/Spotify-Clone)
+![](https://img.shields.io/github/last-commit/jeffjiang13/Spotify-Clone)
 
 
 <h4>
-      <a href="">View Demo</a>
+      <a href="https://jj-spotify.vercel.app">View Demo</a>
   <span> · </span>
     <a href="https://github.com/jeffjiang13/Spotify-Clone/blob/master/README.md">Documentation</a>
   <span> · </span>
@@ -58,7 +58,7 @@
 </div>
 
 
-## <a href="" target="_blank">LIVE DEMO 💥</a>
+## <a href="https://jj-spotify.vercel.app" target="_blank">LIVE DEMO 💥</a>
 
 ![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)
 ![forthebadge](https://forthebadge.com/images/badges/for-you.svg)
