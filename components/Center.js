@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { ChevronDownIcon } from "@heroicons/react/outline";
 import { shuffle } from "lodash";
-import { useRecoilValue, useRecoilState } from "recoil";
-
+import { signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 import Songs from "./Songs";
-
-import { ChevronDown } from "../icons/ChevronDown";
 
 const colors = [
   "from-indigo-500",
@@ -19,52 +17,52 @@ const colors = [
   "from-purple-500",
 ];
 
-const Center = () => {
+function Center() {
   const { data: session } = useSession();
   const spotifyApi = useSpotify();
+  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
+  const [playlist, setPlaylist] = useRecoilState(playlistState);
   const [color, setColor] = useState(null);
-  const playlistId = useRecoilValue(playlistIdState);
-  const [playlist, setPlayList] = useRecoilState(playlistState);
 
   useEffect(() => {
     setColor(shuffle(colors).pop());
-  }, [playlistId]);
+  }, [playlist]);
 
   useEffect(() => {
-    spotifyApi
-      .getPlaylist(playlistId)
-      .then((data) => {
-        setPlayList(data.body);
-      })
-      .catch((err) => console.log("Somthing wen wrong!", err));
+    spotifyApi.getPlaylist(playlistId).then(
+      function (data) {
+        console.log("Some information about this playlist", data.body);
+        setPlaylist(data.body);
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
   }, [spotifyApi, playlistId]);
 
-  /*   console.log(playlist); */
-
   return (
-    <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
+    <div className="bg-black flex-grow col-span-full relative h-screen overflow-y-scroll scrollbar-hide">
       <header className="absolute top-5 right-8">
         <div
-          className="flex items-center bg-black space-x-3 opacity-90 hover:opacity-80
-        cursor-pointer rounded-full p-1 pr-2 text-gray-100"
-          onClick={() => signOut()}
+          onClick={signOut}
+          className="flex items-center bg-black space-x-3 text-white opacity-90 rounded-full p-1 pr-2 hover:opacity-80 cursor-pointer"
         >
           <img
+            className="rounded-full w-10 h-10"
             src={session?.user.image}
             alt=""
-            className="rounded-full w-10 h-10"
           />
           <h2>{session?.user.name}</h2>
-          <ChevronDown />
+          <ChevronDownIcon className="h-5 w-5" />
         </div>
       </header>
+
       <section
-        className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color}  h-80 text-white p-8`}
+        className={`flex items-end space-x-7 bg-gradient-to-b ${color} from to-black h-80 text-white p-8`}
       >
         <img
-          className="h-44 w-44 shadow-2xl"
           src={playlist?.images?.[0]?.url}
-          alt=""
+          className="h-44 w-44 shadow-2xl"
         />
         <div>
           <p>PLAYLIST</p>
@@ -73,11 +71,12 @@ const Center = () => {
           </h1>
         </div>
       </section>
-      <div>
+
+      <div className="">
         <Songs />
       </div>
     </div>
   );
-};
+}
 
 export default Center;

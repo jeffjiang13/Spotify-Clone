@@ -1,11 +1,11 @@
+import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
-import { useSession, signIn } from "next-auth/react";
 import SpotifyWebApi from "spotify-web-api-node";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
   clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
-  redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URI,
+  redirectUri: process.env.REDIRECT_URI,
 });
 
 function useSpotify() {
@@ -13,9 +13,11 @@ function useSpotify() {
 
   useEffect(() => {
     if (session) {
+      // If refresh access token attempt fails, direct user to login...
       if (session.error === "RefreshAccessTokenError") {
-        signIn();
+        signIn(); // Force sign in to hopefully resolve error
       }
+
       spotifyApi.setAccessToken(session.user.accessToken);
     }
   }, [session]);
