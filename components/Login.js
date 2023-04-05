@@ -40,6 +40,3 @@ const Login = ({ providers }) => {
 };
 
 export default Login;
-
-
-Adding providers && before Object.values(providers).map() ensures that the mapping will only be executed if providers is not null or undefined.
